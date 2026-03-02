@@ -34,6 +34,9 @@ def home(request: Request):
         {"posts": posts, "title": "Home"}
     )
 
-@app.get("/api/posts")
-def get_posts():
-    return posts
+@app.get("/api/post/{post_id}")
+def get_post(post_id: int):
+    for post in posts:
+        if post.get("id") == post_id:
+            return post
+    return {"error": "Post not found..."}
